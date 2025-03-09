@@ -5,13 +5,18 @@ import { Server } from "socket.io";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
-
+;
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
 // file://your/system/path/file.html
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+
+// exposing public directory to outside
+
+app.use(express.static("public"));
 
 // handle incoming http request
 
@@ -28,7 +33,7 @@ io.on("connection", (socket) => {
     
 })
 
-app.listen(9000, () => {
+server.listen(9000, () => {
     console.log(`Server listening on port 9000`);
     
 });
